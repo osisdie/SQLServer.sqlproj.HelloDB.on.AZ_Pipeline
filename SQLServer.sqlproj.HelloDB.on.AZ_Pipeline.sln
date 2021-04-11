@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "HelloHElloDB.database", "src\HelloDB\HelloHElloDB.database.sqlproj", "{B8FD21CE-E44D-411E-A8E0-8A882213A581}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A004AC93-7A0A-4DB3-985A-836401DA14A3}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		deploy\.version = deploy\.version
+		deploy\azure-pipelines.yml = deploy\azure-pipelines.yml
+		ChangeLog.md = ChangeLog.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8FD21CE-E44D-411E-A8E0-8A882213A581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8FD21CE-E44D-411E-A8E0-8A882213A581}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8FD21CE-E44D-411E-A8E0-8A882213A581}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{B8FD21CE-E44D-411E-A8E0-8A882213A581}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8FD21CE-E44D-411E-A8E0-8A882213A581}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8FD21CE-E44D-411E-A8E0-8A882213A581}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC04D1FF-52E1-4D15-84E9-4D796CEAD81E}
+	EndGlobalSection
+EndGlobal

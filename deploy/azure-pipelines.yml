@@ -1,0 +1,76 @@
+# ASP.NET
+# Build and test ASP.NET projects.
+# Add steps that publish symbols, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
+name: "Build HelloDB Database"
+trigger:
+  branches:
+    include:
+      - master
+      - feature/*
+  paths:
+    exclude:
+      - .gitignore
+      - .gitattributes
+      - deploy/*
+      - tests/*
+      - '**/*.sqlproj'
+      - '**/*.md'
+      - '**/*.bat'
+      - '**/*.sln'
+      - '**/*.json'
+      - '**/*.yml'
+      - '**/*.yaml'
+
+pool:
+  vmImage: 'vs2017-win2016'
+
+variables:
+  #- you could warp all dynamic variable into a group
+  #- group: database-HelloDB-var-group
+  - name: AZ_GIT_USER_EMAIL
+    value: ci@example.com
+  - name: AZ_GIT_USER_NAME
+    value: ci
+  - name: SVC_VERSION_FILE
+    value: deploy/.version
+  - name: VAR_BUILD_CONFIGURATION
+    value: Release
+  - name: VAR_DATABASE_NAME 
+    value: HelloDB
+    readonly: 'true'
+  - name: VAR_BUILD_ID
+    value: $(Build.BuildId)
+
+steps:
+  - checkout: self
+    persistCredentials: 'true'
+
+  - task: PowerShell@2
+    displayName: 'Versioning'
+    inputs:
+      targetType: 'inline'
+      script: |
+        [string]$CURRENT_VERSION = gc $(SVC_VERSION_FILE)
+
+        IF([string]::IsNullOrEmpty($CURRENT_VERSION)) {
+            echo "version is unset"; exit 1
+        } else {
+            echo "version is set to '$CURRENT_VERSION'"
+            echo "##vso[task.setvariable variable=CURRENT_VERSION]$CURRENT_VERSION-$(Build.BuildId)"
+        }
+
+  - task: VSBuild@1
+    displayName: 'Build'
+    inputs:
+      configuration: ${{ variables.VAR_BUILD_CONFIGURATION }}
+
+  - task: PowerShell@2
+    displayName: 'Git Tag'
+    inputs:
+      targetType: 'inline'
+      script: |
+        git config --global user.email $(AZ_GIT_USER_EMAIL)
+        git config --global user.name $(AZ_GIT_USER_NAME)
+        git tag -a ${{ variables.VAR_DATABASE_NAME }}/v$(CURRENT_VERSION) -m 'ci: Pipeline git tagged [skip ci]' 
+        git push --tags
