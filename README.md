@@ -28,7 +28,7 @@ Whenever any feature, bugfix or necessary to rebuild a new image, make sure you 
 - Version Format: `#.#.#.#-###`
   - [major version].[minor version].[build version].[revision version]  (ex: `1.0.0.100`)
   - Adding AZ pipeline's build-id in the suffix
-    - #**.**#**.**#**-**###  (ex: `1.0.0.0-100`)
+    - #**.**#**.**#**.**#**-**###  (ex: `1.0.0.0-100`)
 
 - ChangeLog File: `./ChangeLog.md`
 - ChangeLog Format: Markdown with date and version number, such as
